@@ -17,12 +17,13 @@ driver.find_element_by_id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowall
 sleep(1)
 
 # Click onto HLTV x BitSkins League
-driver.find_element_by_xpath('//*[@id="fantasy"]/div/div[2]/div/div/div[3]/div[1]/table/tbody/tr[1]/td[1]').click()
+driver.find_element_by_xpath('//*[@id="fantasy"]/div/div[2]/div/div/div[3]/div[1]/table/tbody/tr[1]/td[1]/a').click()
 sleep(1)
 
 # Get number of team pages.
 pages_ele = driver.find_element_by_class_name("standing-leaderboard-count")
 num_pages = int(pages_ele.text[pages_ele.text.index("of")+3:])
+print("Number of team pages =", num_pages)
 
 # List of 10 elements of each team on page
 team_elements = driver.find_elements_by_class_name("tr-wrapper")
@@ -31,13 +32,12 @@ team_elements = driver.find_elements_by_class_name("tr-wrapper")
 clickable_team_elements = []
 for team_ele in team_elements:
     clickable_team_elements.append(team_ele.find_element_by_xpath(".//*"))
-# print("CLICKABLE ELEMENTS =", clickable_team_elements)
 
 # Click on first team
 clickable_team_elements[0].click()
 sleep(1)
 
-# TODO: Change this to get name of each player on team
-print(driver.find_element_by_class_name("text-ellipsis").text)
+# Player card elements
+print(driver.find_elements_by_css_selector(".player-block.player-not-in-match"))
 
 # driver.close()
